@@ -1,0 +1,61 @@
+#1. Assigning element to diffrent list
+
+mylist =["anshu","chotu",5,0.7,]
+print(mylist)  # it willprint all the value in my list 
+mylist.append("my captain") # it will add  my captain at the last of the list   
+print(mylist)
+mylist.remove("anshu") # it will remove anshu from mylist
+print(mylist)
+del mylist[0]
+print(mylist)  # it will delate the 0 index no.
+
+##Output
+['anshu', 'chotu', 5, 0.7]
+['anshu', 'chotu', 5, 0.7, 'my captain']
+['chotu', 5, 0.7, 'my captain']
+[5, 0.7, 'my captain']
+
+
+
+
+
+
+
+
+
+
+#2.Accesisng element for tuples
+tuple1 = ("anshu","chotu","david")
+print(tuple1)
+type(tuple1) # it will shoe the type as tuple
+print(len(tuple1)) # it will print the length of tuple
+print(tuple1[0])   # it will print the oth index no value
+
+##Output
+('anshu', 'chotu', 'david')
+3
+anshu
+
+
+
+
+
+
+#3.Delating diffrent distionary element 
+mydict= {"anshu":"25",
+        "chotu":"18",
+        "david":"26"}
+print(mydict)
+print(mydict["anshu"]) # it willprint the value of key anshu
+del mydict["anshu"]  # it will delate the anshu from my dictionary
+print(mydict)
+mydict.pop("david")  # it will remove the key david and its value from the list 
+print(mydict)
+
+##output
+{'anshu': '25', 'chotu': '18', 'david': '26'}
+25
+{'chotu': '18', 'david': '26'}
+{'chotu': '18'}
+
+
