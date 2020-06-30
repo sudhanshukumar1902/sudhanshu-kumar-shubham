@@ -1,0 +1,215 @@
+# Instructions:-
+1. Import the dataset.
+2. Data quality check:
+a. Check if null values are present. If there are, drop those rows.
+3. Exploratory Data Analysis:
+a. Univariate Analysis:
+i. Draw a minimum of 5 histograms .
+ii. Draw boxplots for each numerical columns.
+b. Bivariate analysis:
+i. Draw a minimum of 5 scatter plots
+4. Modelling:
+a. Split the dataset using “train-test-split” function.
+b. Apply KNN classification on “quality” column of the dataset. Select the
+appropriate features
+c. Predict on the test set.
+d. Find out the accuracy
+
+
+import numpy as np 
+import pandas as pd 
+import matplotlib.pyplot as plt
+
+## Import the data set 
+
+wine_data = pd.read_csv("F:\BA\Data\datasets_4458_8204_winequality-red.csv")
+
+wine_data.head()
+
+## Data quality check: a. Check if null values are present. If there are, drop those rows
+
+wine_data.isnull()
+
+wine_data.isnull().sum()
+
+# There is no null value in wine_data data set 
+
+wine_data.shape
+
+wine_data.dropna(how ="any").shape
+
+## Exploratory Data Analysis: 
+a. Univariate Analysis:
+i. Draw a minimum of 5 histograms . 
+ii. Draw boxplots for each numerical columns. 
+b. Bivariate analysis: 
+i. Draw a minimum of 5 scatter plots
+
+fixed_acidity =wine_data["fixed acidity"]
+volatile_acidity= wine_data["volatile acidity"]
+residual_sugar = wine_data["residual sugar"]
+free_sulfur_dioxide= wine_data["free sulfur dioxide"]
+quality = wine_data["quality"]
+citric_acid = wine_data["citric acid"]
+chlorides = wine_data["chlorides"]
+total_sulfur_dioxide=wine_data["total sulfur dioxide"]
+density =wine_data["density"]
+ph =wine_data["pH"]
+sulphates =wine_data["sulphates"]
+alcohol =wine_data["alcohol"]
+
+fixed_acidity.head()
+
+plt.hist(fixed_acidity,  bins = 10 )
+plt.xlabel("Fixed Acidity")
+plt.ylabel("Quantity")
+plt.show()
+
+plt.hist(volatile_acidity,  bins = 10 )
+plt.xlabel("volatile acidity")
+plt.ylabel("Quantity")
+plt.show()
+
+
+plt.hist(residual_sugar,  bins = 10 )
+plt.xlabel("residual_sugar")
+plt.ylabel("Quantity")
+plt.show()
+
+
+plt.hist(free_sulfur_dioxide,  bins = 10 )
+plt.xlabel("free_sulfur_dioxide")
+plt.ylabel("Quantity")
+plt.show()
+
+
+plt.hist(quality,  bins = 10 )
+plt.xlabel("quality")
+plt.ylabel("Quantity")
+plt.show()
+
+## Draw box plot for each numerical Column
+
+plt.boxplot(fixed_acidity )
+plt.xlabel("Fixed Acidity")
+plt.ylabel("%age of Quantity")
+plt.show()
+
+plt.boxplot(volatile_acidity)
+plt.xlabel("volatile acidity")
+plt.ylabel("%age of Quantity")
+plt.show()
+
+plt.boxplot(residual_sugar)
+plt.xlabel("residual_sugar")
+plt.ylabel("%age of Quantity")
+plt.show()
+
+
+plt.boxplot(free_sulfur_dioxide)
+plt.xlabel("free_sulfur_dioxide")
+plt.ylabel("%age of Quantity")
+plt.show()
+
+
+plt.boxplot(quality)
+plt.xlabel("quality")
+plt.ylabel("%age of Quantity")
+plt.show()
+
+plt.boxplot(citric_acid)
+plt.xlabel("citric acid")
+plt.ylabel("%age of Quantity")
+plt.show()
+
+plt.boxplot(chlorides)
+plt.xlabel("chlorides")
+plt.ylabel("%age of Quantity")
+plt.show()
+
+plt.boxplot(total_sulfur_dioxide)
+plt.xlabel("total sulfur dioxide")
+plt.ylabel("%age of Quantity")
+plt.show()
+
+plt.boxplot(density)
+plt.xlabel("density")
+plt.ylabel("%age of Quantity")
+plt.show()
+
+plt.boxplot(ph)
+plt.xlabel("pH")
+plt.ylabel("%age of Quantity")
+plt.show()
+
+plt.boxplot(alcohol)
+plt.xlabel("alcohol")
+plt.ylabel("%age of Quantity")
+plt.show()
+
+## Draw a minimum 5 Scatter Plot 
+
+fixed_acidity =wine_data["fixed acidity"]
+volatile_acidity= wine_data["volatile acidity"]
+residual_sugar = wine_data["residual sugar"]
+free_sulfur_dioxide= wine_data["free sulfur dioxide"]
+quality = wine_data["quality"]
+citric_acid = wine_data["citric acid"]
+chlorides = wine_data["chlorides"]
+total_sulfur_dioxide=wine_data["total sulfur dioxide"]
+density =wine_data["density"]
+ph =wine_data["pH"]
+sulphates =wine_data["sulphates"]
+alcohol =wine_data["alcohol"]
+
+_1scplt = plt.plot(fixed_acidity,quality , marker =".", linestyle ="none")
+_1scplt = plt.xlabel("fixed_acidity")
+_1scplt = plt.ylabel("Quality")
+
+_2scplt = plt.plot(citric_acid, alcohol , marker =".", linestyle ="none")
+_2scplt = plt.xlabel("alcohol")
+_2scplt = plt.ylabel("Quality")
+
+_3scplt = plt.plot(ph, alcohol , marker =".", linestyle ="none")
+_3scplt = plt.xlabel("ph")
+_3scplt = plt.ylabel("alcohol")
+
+_4scplt = plt.plot(density, quality , marker =".", linestyle ="none")
+_4scplt = plt.xlabel("density")
+_4scplt = plt.ylabel("quality")
+
+_5scplt = plt.plot(density, ph , marker =".", linestyle ="none")
+_5scplt = plt.xlabel("density")
+_5scplt = plt.ylabel("ph")
+
+# 4. modeling 
+a. Split the dataset using “train-test-split” function. b. Apply KNN classification on “quality” column of the dataset. Select the appropriate features c. Predict on the test set. d. Find out the accuracy
+
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
+
+y= wine_data["quality"]
+x = wine_data.drop("quality", axis = 1)
+
+x
+
+y
+
+x_train,x_test,y_train,y_test = train_test_split(x,y,test_size = 0.2 , random_state = 42 , stratify = y)
+
+len(x_train)
+
+len(x_test)
+
+knn = KNeighborsClassifier(n_neighbors= 7)
+
+knn.fit(x,y)
+
+print(knn.score(x_test,y_test))
+
+knn.predict(x_test)
+
+knn.score(x_test,y_test)
+
+print("Features:",wine_data.quality)
+
